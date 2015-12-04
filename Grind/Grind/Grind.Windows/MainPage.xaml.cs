@@ -22,10 +22,11 @@ namespace Grind
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        ToDoListManager todoList = new ToDoListManager();
         public MainPage()
         {
             this.InitializeComponent();
-            ToDoListManager todoList = new ToDoListManager();
+            
             //initalize boxes
             toDoBox.ItemsSource = todoList.toDoList;
            
@@ -55,7 +56,53 @@ namespace Grind
 
         private void doneBox_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
+            
+        }
 
+
+        private void doneBox_OnDragOver(object sender, DragEventArgs e)
+        {
+            var dropTarget = sender as ListView;
+            if (dropTarget == null)
+            {
+                return;
+            }
+
+            //dropTarget.Background = listViewDragOverBackgroundBrush;
+        }
+
+        private void doneBox_OnDragLeave(object sender, DragEventArgs e)
+        {
+            var dropTarget = sender as ListView;
+            if (dropTarget == null)
+            {
+                return;
+            }
+
+            dropTarget.Background = null;
+        }
+
+        private void doneBox_Drop(object sender, DragEventArgs e)
+        {
+            object doneItems;
+            e.Data.Properties.TryGetValue("items", out doneItems);
+            var doneList = doneItems as List<String>;
+            foreach (var item in doneList){
+                todoList.doneList.Add(item);
+                todoList.toDoList.Remove(item);
+            }
+        }
+
+        private void toDoBox_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        {
+            List<String> items = new List<String>();
+            foreach (var str in e.Items)
+            {
+                items.Add(str.ToString());
+            }
+
+            e.Data.Properties.Add("items", items);
+            
         }
     }
 }
