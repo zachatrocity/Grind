@@ -49,16 +49,6 @@ namespace Grind
             //to do
         }
 
-        private void toDoBoxPressed(object sender, PointerRoutedEventArgs e)
-        {
-
-        }
-
-        private void doneBox_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            
-        }
-
 
         private void doneBox_OnDragOver(object sender, DragEventArgs e)
         {
@@ -71,16 +61,6 @@ namespace Grind
             //dropTarget.Background = listViewDragOverBackgroundBrush;
         }
 
-        private void doneBox_OnDragLeave(object sender, DragEventArgs e)
-        {
-            var dropTarget = sender as ListView;
-            if (dropTarget == null)
-            {
-                return;
-            }
-
-            dropTarget.Background = null;
-        }
 
         private void doneBox_Drop(object sender, DragEventArgs e)
         {
@@ -93,7 +73,7 @@ namespace Grind
             }
         }
 
-        private void toDoBox_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
+        private void box_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
         {
             List<String> items = new List<String>();
             foreach (var str in e.Items)
@@ -103,6 +83,18 @@ namespace Grind
 
             e.Data.Properties.Add("items", items);
             
+        }
+
+        private void toDoBox_Drop(object sender, DragEventArgs e)
+        {
+            object doneItems;
+            e.Data.Properties.TryGetValue("items", out doneItems);
+            var doneList = doneItems as List<String>;
+            foreach (var item in doneList)
+            {
+                todoList.toDoList.Add(item);
+                todoList.doneList.Remove(item);
+            }
         }
     }
 }

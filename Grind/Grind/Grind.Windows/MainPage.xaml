@@ -13,7 +13,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ListView x:Name="toDoBox" Grid.Column="0" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329" 
-                  AllowDrop="True" CanDragItems="True" CanReorderItems="True" PointerPressed="toDoBoxPressed" DragItemsStarting="toDoBox_DragItemsStarting">
+                  AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="toDoBox_Drop" SelectionMode="Multiple">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -22,7 +22,16 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ListView x:Name="doneBox" Grid.Column="1" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329" AllowDrop="True" CanDragItems="True" CanReorderItems="True" PointerPressed="doneBox_PointerPressed" Drop="doneBox_Drop"/>
+        <ListView x:Name="doneBox" Grid.Column="1" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329"
+                  AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="doneBox_Drop" SelectionMode="Multiple">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <TextBlock x:Name="toDoTextBlock" Grid.Column="0" HorizontalAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="To Do:" VerticalAlignment="Top" Height="35" Width="70" FontSize="24"/>
         <TextBlock x:Name="doneTextBlock" Grid.Column="1" HorizontalAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="Done:" VerticalAlignment="Top" Height="35" Width="70" FontSize="24"/>
         <Button x:Name="settingsButton" Content="Settings" Grid.Column="1" HorizontalAlignment="Right" Margin="0,30,30,0" Width="100" VerticalAlignment="Top" Click="settingsButton_Click"/>
