@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\about.png" />
+    <Content Include="Assets\add.png" />
     <Content Include="Assets\celsius.png" />
     <Content Include="Assets\fahrenheit.png" />
     <Content Include="Assets\layout.png" />

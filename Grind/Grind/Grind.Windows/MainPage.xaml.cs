@@ -159,11 +159,34 @@ namespace Grind
 
         private void toDoBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            var item = ((ListView)sender).SelectedItem.ToString();
-            if(item != null)
+            try
             {
-                todoList.doneList.Add(item);
-                todoList.toDoList.Remove(item);
+                var item = ((ListView)sender).SelectedItem.ToString();
+                if (item != null)
+                {
+                    todoList.doneList.Add(item);
+                    todoList.toDoList.Remove(item);
+                }
+            }
+            catch(NullReferenceException)
+            {
+                //do nothing
+            }
+        }
+
+
+        private void addButton_Click(object sender, RoutedEventArgs e)
+        {
+            todoList.toDoList.Add(addToDoTextBox.Text);
+            addToDoTextBox.Text = "";
+        }
+
+        private void addToDoTextBox_KeyUp(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                todoList.toDoList.Add(addToDoTextBox.Text);
+                addToDoTextBox.Text = "";
             }
         }
     }
