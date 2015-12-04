@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System.Threading.Timer;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,7 +26,8 @@ namespace Grind
     public sealed partial class MainPage : Page
     {
         ToDoListManager todoList = new ToDoListManager();
-        
+        WeatherAPI weather = new WeatherAPI();
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -34,6 +36,15 @@ namespace Grind
            
             doneBox.ItemsSource = todoList.doneList;
 
+            setWeatherWidget();
+        }
+
+        private async void setWeatherWidget()
+        {
+            //set weather
+            string temp = await weather.getCurrentTemp();
+            string summary = await weather.getCurrentSummary();
+            weatherWidget.Text = temp + "° - " + summary;
         }
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)

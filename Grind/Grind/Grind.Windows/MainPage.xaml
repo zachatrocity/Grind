@@ -12,6 +12,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="weatherWidget" Grid.Column="0" HorizontalAlignment="Left" Margin="35,35,0,0" TextWrapping="Wrap" Text="Weather" VerticalAlignment="Top" Height="auto" Width="auto" FontSize="32"/>
+
         <ListView x:Name="toDoBox" Grid.Column="0" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="325" 
                   AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="toDoBox_Drop" SelectionMode="Multiple"  DragOver="todobox_OnDragOver" DragLeave="box_DragLeave" DoubleTapped="toDoBox_DoubleTapped">
             <ListView.ItemTemplate>
