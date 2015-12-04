@@ -27,6 +27,7 @@ namespace Grind
         ToDoListManager todoList = new ToDoListManager();
         WeatherAPI weather = new WeatherAPI();
         DispatcherTimer weatherTimer = new DispatcherTimer();
+        
         public MainPage()
         {
             this.InitializeComponent();

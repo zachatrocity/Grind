@@ -13,15 +13,17 @@ namespace Grind
         //https://api.darkskyapp.com/v1/forecast/d41d8cd98f00b204e9800998ecf8427e/42.7243,-73.6927
         private static string APIKEY = "bb70271303471570aff4370dabe92cdf";
         private Geolocator Locator = new Geolocator();
-        private double LAT;
-        private double LONG;
+        private double LAT = 35.2469;
+        private double LONG = -91.7336;
         private ForecastApi API = new ForecastApi(APIKEY);
         public ForecastIOPortable.Models.HourlyForecast HourlyForecast;
         //0 is bad, 1 is good.
         public int statusCode = 0;
         public WeatherAPI()
         {
-            setLocation();
+
+            
+
             updateWeatherForecast();
         }
 
