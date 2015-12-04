@@ -129,10 +129,22 @@
     <None Include="Grind.Windows_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\about.png" />
+    <Content Include="Assets\celsius.png" />
+    <Content Include="Assets\fahrenheit.png" />
+    <Content Include="Assets\layout.png" />
     <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\reddit.png" />
+    <Content Include="Assets\settings.png" />
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\check.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\twitter.png" />
+    <Content Include="Assets\undo.png" />
+    <Content Include="Assets\weather.png" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="AboutPage.xaml">

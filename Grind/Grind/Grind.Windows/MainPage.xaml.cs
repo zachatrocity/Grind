@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.Xaml.Media.Imaging;    
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,10 +25,10 @@ namespace Grind
     public sealed partial class MainPage : Page
     {
         ToDoListManager todoList = new ToDoListManager();
+        
         public MainPage()
         {
             this.InitializeComponent();
-            
             //initalize boxes
             toDoBox.ItemsSource = todoList.toDoList;
            
@@ -50,7 +52,7 @@ namespace Grind
         }
 
 
-        private void doneBox_OnDragOver(object sender, DragEventArgs e)
+        private void donebox_OnDragOver(object sender, DragEventArgs e)
         {
             var dropTarget = sender as ListView;
             if (dropTarget == null)
@@ -58,7 +60,32 @@ namespace Grind
                 return;
             }
 
-            //dropTarget.Background = listViewDragOverBackgroundBrush;
+            //DispatcherTimer timer = new DispatcherTimer();
+            //timer.Interval = new System.TimeSpan(0, 0, 0, 10);
+            //timer.Tick += checkFadeIn;
+            //timer.Start();
+            if (checkImage.Opacity == 0)
+            {
+                fadeIn.Begin();
+            }
+        }
+
+        private void checkFadeIn(object sender, object e)
+        {
+            checkImage.Opacity += .1; 
+        }
+
+
+        private void todobox_OnDragOver(object sender, DragEventArgs e)
+        {
+            var dropTarget = sender as ListView;
+            if (dropTarget == null)
+            {
+                return;
+            }
+
+            if (undoImage.Opacity == 0)
+                undoFadeIn.Begin();
         }
 
 
@@ -71,6 +98,9 @@ namespace Grind
                 todoList.doneList.Add(item);
                 todoList.toDoList.Remove(item);
             }
+
+            if(checkImage.Opacity > 0)
+                fadeOut.Begin();
         }
 
         private void box_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
@@ -94,6 +124,46 @@ namespace Grind
             {
                 todoList.toDoList.Add(item);
                 todoList.doneList.Remove(item);
+            }
+
+            if (undoImage.Opacity > 0)
+                undoFadeOut.Begin();
+        }
+
+        private void box_DragLeave(object sender, DragEventArgs e)
+        {
+            var dropTarget = sender as ListView;
+            if (dropTarget == null)
+            {
+                return;
+            }
+
+            if (undoImage.Opacity > 0)
+            {
+                undoFadeOut.Begin();
+            }
+        }
+
+        private void doneBox_DragLeave(object sender, DragEventArgs e)
+        {
+            var dropTarget = sender as ListView;
+            if (dropTarget == null)
+            {
+                return;
+            }
+            if (checkImage.Opacity > 0)
+            {
+                fadeOut.Begin();
+            }
+        }
+
+        private void toDoBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            var item = ((ListView)sender).SelectedItem.ToString();
+            if(item != null)
+            {
+                todoList.doneList.Add(item);
+                todoList.toDoList.Remove(item);
             }
         }
     }

@@ -12,18 +12,18 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="toDoBox" Grid.Column="0" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329" 
-                  AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="toDoBox_Drop" SelectionMode="Multiple">
+        <ListView x:Name="toDoBox" Grid.Column="0" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329"
+                  AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="toDoBox_Drop" SelectionMode="Multiple"  DragOver="todobox_OnDragOver" DragLeave="box_DragLeave" DoubleTapped="toDoBox_DoubleTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}"/>
+                        <TextBlock Text="{Binding}" Margin="20,0,0,0"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ListView x:Name="doneBox" Grid.Column="1" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329"
-                  AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="doneBox_Drop" SelectionMode="Multiple">
+        <ListView x:Name="doneBox" Grid.Column="1" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329" 
+                  AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="doneBox_Drop" SelectionMode="Multiple" DragOver="donebox_OnDragOver" DragLeave="doneBox_DragLeave">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -37,6 +37,31 @@
         <Button x:Name="settingsButton" Content="Settings" Grid.Column="1" HorizontalAlignment="Right" Margin="0,30,30,0" Width="100" VerticalAlignment="Top" Click="settingsButton_Click"/>
         <Button x:Name="layoutButton" Content="Layout" Grid.Column="1" HorizontalAlignment="Right" Margin="0,90,30,0" Width="100" VerticalAlignment="Top" Click="layoutButton_Click"/>
         <Button x:Name="aboutButton" Content="About" Grid.Column="1" HorizontalAlignment="Right" Margin="0,150,30,0" Width="100" VerticalAlignment="Top" Click="aboutButton_Click"/>
+
+        <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="500" VerticalAlignment="Center" Width="500">
+            <Image x:Name="checkImage" Source="ms-appx:///Assets/check.png" Opacity="0" Height="500" Width="500">
+                <Image.Resources>
+                    <Storyboard x:Name="fadeIn">
+                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" Storyboard.TargetName="checkImage" From="0" To="1" Duration="0:0:1" />
+                    </Storyboard>
+                    <Storyboard x:Name="fadeOut">
+                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" Storyboard.TargetName="checkImage" From="1" To="0" Duration="0:0:1" />
+                    </Storyboard>
+                </Image.Resources>
+            </Image>
+        </StackPanel>
+        <StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Center" Height="500" VerticalAlignment="Center" Width="500">
+            <Image x:Name="undoImage" Source="ms-appx:///Assets/undo.png" Opacity="0" Height="500" Width="500">
+                <Image.Resources>
+                    <Storyboard x:Name="undoFadeIn">
+                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" Storyboard.TargetName="undoImage" From="0" To="1" Duration="0:0:1" />
+                    </Storyboard>
+                    <Storyboard x:Name="undoFadeOut">
+                        <DoubleAnimation Storyboard.TargetProperty="(Image.Opacity)" Storyboard.TargetName="undoImage" From="1" To="0" Duration="0:0:1" />
+                    </Storyboard>
+                </Image.Resources>
+            </Image>
+        </StackPanel>
 
     </Grid>
 </Page>
