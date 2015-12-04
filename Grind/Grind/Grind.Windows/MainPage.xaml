@@ -12,13 +12,13 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="toDoBox" Grid.Column="0" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329"/>
-        <ListBox x:Name="doneBox" Grid.Column="1" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329"/>
+        <ListBox x:Name="toDoBox" Grid.Column="0" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329" AllowDrop="True"/>
+        <ListBox x:Name="doneBox" Grid.Column="1" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="329" AllowDrop="True"/>
         <TextBlock x:Name="toDoTextBlock" Grid.Column="0" HorizontalAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="To Do:" VerticalAlignment="Top" Height="35" Width="70" FontSize="24"/>
         <TextBlock x:Name="doneTextBlock" Grid.Column="1" HorizontalAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="Done:" VerticalAlignment="Top" Height="35" Width="70" FontSize="24"/>
-        <Button x:Name="settingsButton" Content="Settings" Grid.Column="1" HorizontalAlignment="Right" Margin="0,30,30,0" Width="100" VerticalAlignment="Top"/>
-        <Button x:Name="layoutButton" Content="Layout" Grid.Column="1" HorizontalAlignment="Right" Margin="0,90,30,0" Width="100" VerticalAlignment="Top"/>
-        <Button x:Name="aboutButton" Content="About" Grid.Column="1" HorizontalAlignment="Right" Margin="0,150,30,0" Width="100" VerticalAlignment="Top"/>
+        <Button x:Name="settingsButton" Content="Settings" Grid.Column="1" HorizontalAlignment="Right" Margin="0,30,30,0" Width="100" VerticalAlignment="Top" Click="settingsButton_Click"/>
+        <Button x:Name="layoutButton" Content="Layout" Grid.Column="1" HorizontalAlignment="Right" Margin="0,90,30,0" Width="100" VerticalAlignment="Top" Click="layoutButton_Click"/>
+        <Button x:Name="aboutButton" Content="About" Grid.Column="1" HorizontalAlignment="Right" Margin="0,150,30,0" Width="100" VerticalAlignment="Top" Click="aboutButton_Click"/>
 
     </Grid>
 </Page>

@@ -25,6 +25,27 @@ namespace Grind
         public MainPage()
         {
             this.InitializeComponent();
+            ToDoListManager todoList = new ToDoListManager();
+            //initalize boxes
+            toDoBox.ItemsSource = todoList.toDoList;
+            
+            doneBox.ItemsSource = todoList.doneList;
+
+        }
+
+        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof (SettingsPage));
+        }
+
+        private void aboutButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AboutPage));
+        }
+
+        private void layoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            //to do
         }
     }
 }
