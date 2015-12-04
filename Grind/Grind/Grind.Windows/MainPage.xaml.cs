@@ -28,7 +28,7 @@ namespace Grind
             ToDoListManager todoList = new ToDoListManager();
             //initalize boxes
             toDoBox.ItemsSource = todoList.toDoList;
-            
+           
             doneBox.ItemsSource = todoList.doneList;
 
         }
@@ -46,6 +46,16 @@ namespace Grind
         private void layoutButton_Click(object sender, RoutedEventArgs e)
         {
             //to do
+        }
+
+        private void toDoBoxPressed(object sender, PointerRoutedEventArgs e)
+        {
+
+        }
+
+        private void doneBox_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,8 +9,8 @@ namespace Grind
 {
     class ToDoListManager
     {
-        public List<string> toDoList = new List<string>();
-        public List<string> doneList = new List<string>();
+        public ObservableCollection<string> toDoList = new ObservableCollection<string>();
+        public ObservableCollection<string> doneList = new ObservableCollection<string>();
 
         public ToDoListManager()
         {
