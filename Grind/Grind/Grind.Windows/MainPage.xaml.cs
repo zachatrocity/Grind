@@ -14,7 +14,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using System.Threading.Timer;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,7 +26,7 @@ namespace Grind
     {
         ToDoListManager todoList = new ToDoListManager();
         WeatherAPI weather = new WeatherAPI();
-
+        DispatcherTimer weatherTimer = new DispatcherTimer();
         public MainPage()
         {
             this.InitializeComponent();
@@ -40,6 +39,20 @@ namespace Grind
         }
 
         private async void setWeatherWidget()
+        {
+            //set weather
+            string temp = await weather.getCurrentTemp();
+            string summary = await weather.getCurrentSummary();
+            weatherWidget.Text = temp + "° - " + summary;
+
+            //set it to update every so many minutes
+            weatherTimer = new DispatcherTimer();
+            weatherTimer.Tick += weatherTimer_Tick;
+            weatherTimer.Interval = new TimeSpan(0, 5, 0);
+            weatherTimer.Start();
+        }
+
+        async void weatherTimer_Tick(object sender, object e)
         {
             //set weather
             string temp = await weather.getCurrentTemp();
