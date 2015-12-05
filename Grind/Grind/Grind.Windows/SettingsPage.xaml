@@ -13,6 +13,7 @@
     <Page.Resources>
         <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
         <x:String x:Key="AppName">My Application</x:String>
+
     </Page.Resources>
 
     <!--
@@ -21,6 +22,10 @@
         * Row 1 contains the rest of the page layout
     -->
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.ChildrenTransitions>
             <TransitionCollection>
                 <EntranceThemeTransition/>
@@ -46,5 +51,42 @@
             <TextBlock x:Name="pageTitle" Text="Settings" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="Github" VerticalAlignment="Center" FontSize="48"/>
+                <ToggleSwitch Name="GithubSwitch" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="24" VerticalAlignment="Center" Toggled="GithubSwitch_Toggled"/>
+                <TextBlock Grid.Row="1" Text="Weather" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="48"/>
+                <ToggleSwitch Grid.Row="1" Name="WeatherSwitch" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Toggled="WeatherSwitch_Toggled"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Username:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" ></TextBlock>
+                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Name="GithubUsername" IsEnabled="False"></TextBox>
+                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Text="Location:"/>
+                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" PlaceholderText="City, State" Name="WeatherLocation" IsEnabled="False"/>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

@@ -102,5 +102,29 @@ namespace Grind
         }
 
         #endregion
+
+        private void GithubSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if(GithubSwitch.IsOn)
+            {
+                GithubUsername.IsEnabled = true;
+            }
+            else
+            {
+                GithubUsername.IsEnabled = false;
+            }
+        }
+
+        private void WeatherSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if(WeatherSwitch.IsOn)
+            {
+                WeatherLocation.IsEnabled = true;
+            }
+            else
+            {
+                WeatherLocation.IsEnabled = false;
+            }
+        }
     }
 }
