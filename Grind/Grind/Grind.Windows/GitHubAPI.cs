@@ -16,10 +16,12 @@ namespace Grind
         public string username = "";
         private GitHubClient github;
         private Octokit.User githubUser;
-        public GitHubAPI(string usr)
+        public GitHubAPI(string usr, string pass)
         {
             username = usr;
             github = new GitHubClient(new ProductHeaderValue("Grind"));
+            var basicAuth = new Credentials(usr, pass); 
+            github.Credentials = basicAuth;
             initGitHub();
         }
 

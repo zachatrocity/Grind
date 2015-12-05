@@ -28,6 +28,7 @@ namespace Grind
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         public static bool Github = false;
         public static string githubUsername = "";
+        public static string githubPassword = "";
         public static bool Weather = false;
         public static string weatherLocation = "";
 
@@ -117,11 +118,13 @@ namespace Grind
             if(GithubSwitch.IsOn)
             {
                 GithubUsername.IsEnabled = true;
+                GithubPassword.IsEnabled = true;
                 Github = true;
             }
             else
             {
                 GithubUsername.IsEnabled = false;
+                GithubPassword.IsEnabled = false;
             }
         }
 
@@ -146,6 +149,11 @@ namespace Grind
         private void WeatherLocation_TextChanged(object sender, TextChangedEventArgs e)
         {
             weatherLocation = WeatherLocation.Text;
+        }
+
+        private void GithubPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            githubPassword = GithubPassword.Password;
         }
     }
 }

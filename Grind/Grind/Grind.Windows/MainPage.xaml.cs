@@ -47,7 +47,7 @@ namespace Grind
             {
                 if (SettingsPage.githubUsername != "")
                 {
-                    githubAPI = new GitHubAPI(SettingsPage.githubUsername);
+                    githubAPI = new GitHubAPI(SettingsPage.githubUsername, SettingsPage.githubPassword);
                     setGithubWidget();
                 }
                 else

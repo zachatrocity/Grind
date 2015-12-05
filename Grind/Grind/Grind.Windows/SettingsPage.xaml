@@ -65,8 +65,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" Text="Github" VerticalAlignment="Center" FontSize="48"/>
                 <ToggleSwitch Name="GithubSwitch" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" FontSize="24" VerticalAlignment="Center" Toggled="GithubSwitch_Toggled"/>
-                <TextBlock Grid.Row="1" Text="Weather" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="48"/>
-                <ToggleSwitch Grid.Row="1" Name="WeatherSwitch" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Toggled="WeatherSwitch_Toggled"/>
+                <TextBlock Grid.Row="3" Text="Weather" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="48"/>
+                <ToggleSwitch Grid.Row="3" Name="WeatherSwitch" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Toggled="WeatherSwitch_Toggled"/>
             </Grid>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
@@ -84,8 +84,10 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Username:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" ></TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Name="GithubUsername" IsEnabled="False" TextChanged="GithubUsername_TextChanged"></TextBox>
-                <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Text="Location:"/>
-                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" PlaceholderText="City, State" TextChanged="WeatherLocation_TextChanged" Name="WeatherLocation" IsEnabled="False"/>
+                <TextBlock Text="Password:" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" ></TextBlock>
+                <PasswordBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Name="GithubPassword" IsEnabled="False" PasswordChanged="GithubPassword_PasswordChanged"></PasswordBox>
+                <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Text="Location:"/>
+                <TextBox Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" PlaceholderText="City, State" TextChanged="WeatherLocation_TextChanged" Name="WeatherLocation" IsEnabled="False"/>
             </Grid>
         </StackPanel>
     </Grid>
