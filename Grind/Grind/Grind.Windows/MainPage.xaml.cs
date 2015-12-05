@@ -27,7 +27,7 @@ namespace Grind
         ToDoListManager todoList = new ToDoListManager();
         WeatherAPI weather = new WeatherAPI();
         DispatcherTimer weatherTimer = new DispatcherTimer();
-        
+        GitHubAPI githubAPI;
         public MainPage()
         {
             this.InitializeComponent();
@@ -37,6 +37,18 @@ namespace Grind
             doneBox.ItemsSource = todoList.doneList;
 
             setWeatherWidget();
+            
+            githubAPI = new GitHubAPI("zachatrocity");
+            setGithubWidget();
+        }
+
+        private async void setGithubWidget()
+        {
+            githubUsernameText.Text = githubAPI.username;
+            githubUserImage.ImageSource = await githubAPI.getUserImage();
+            githubFollowersText.Text = await githubAPI.getUserFollowers();
+            githubFollowingText.Text = await githubAPI.getUserFollowing();
+            githubReposText.Text = await githubAPI.getUserRepoCount();
         }
 
         private async void setWeatherWidget()

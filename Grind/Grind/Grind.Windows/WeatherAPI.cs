@@ -21,9 +21,6 @@ namespace Grind
         public int statusCode = 0;
         public WeatherAPI()
         {
-
-            
-
             updateWeatherForecast();
         }
 

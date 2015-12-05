@@ -15,7 +15,7 @@
 
         <TextBlock x:Name="weatherWidget" Grid.Column="0" HorizontalAlignment="Left" Margin="35,35,0,0" TextWrapping="Wrap" Text="Weather" VerticalAlignment="Top" Height="auto" Width="auto" FontSize="32"/>
 
-        <ListView x:Name="toDoBox" Grid.Column="0" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="325" 
+        <ListView x:Name="toDoBox" Grid.Column="0" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="350" 
                   AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="toDoBox_Drop" SelectionMode="Multiple"  DragOver="todobox_OnDragOver" DragLeave="box_DragLeave" DoubleTapped="toDoBox_DoubleTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -35,15 +35,15 @@
         </ListView>
 
             <TextBlock Grid.Column="0" HorizontalAlignment="Center" Height="30" Margin="0,565,0,0" FontSize="14" VerticalAlignment="Top"
-                 Foreground="White" Width="315" Text="Add a task..."></TextBlock>
+                 Foreground="White" Width="345" Text="Add a task..."></TextBlock>
             <TextBox x:Name="addToDoTextBox" Grid.Column="0" HorizontalAlignment="Center" Height="30" Margin="0,585,50,0" VerticalAlignment="Top"
                      KeyUp="addToDoTextBox_KeyUp"
-                 Foreground="White" Width="275" Background="Transparent" BorderBrush="LightSlateGray" BorderThickness="2"></TextBox>
+                 Foreground="White" Width="300" Background="Transparent" BorderBrush="LightSlateGray" BorderThickness="2"></TextBox>
         <Button x:Name="addButton" Grid.Column="0" HorizontalAlignment="Center" Margin="300,577,0,0" VerticalAlignment="Top" Click="addButton_Click"  BorderThickness="0">
             <Image Source="ms-appx:///Assets/add.png" Height="32" Width="32"></Image>
         </Button>
 
-        <ListView x:Name="doneBox" Grid.Column="1" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="325" 
+        <ListView x:Name="doneBox" Grid.Column="1" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="350" 
                   AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="doneBox_Drop" SelectionMode="Multiple" DragOver="donebox_OnDragOver" DragLeave="doneBox_DragLeave">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -96,6 +96,37 @@
                     </Storyboard>
                 </Image.Resources>
             </Image>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="0" Grid.Row="0" Width="400" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="25,0,0,25" x:Name="githubWidget">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Border Width="100" Height="100" Grid.Column="0" CornerRadius="10" Grid.RowSpan="4">
+                    <Border.Background>
+                        <ImageBrush x:Name="githubUserImage" ImageSource=""></ImageBrush>
+                    </Border.Background>
+                </Border>
+
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" x:Name="githubUsernameText" FontSize="24" Margin="25,0,0,0" HorizontalAlignment="Left"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="Followers" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="2" x:Name="githubFollowersText" Text="" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="3" Text="Following" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="2" x:Name="githubFollowingText" Text="" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="3" Grid.Row="3" Text="Repos" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="3" Grid.Row="2" x:Name="githubReposText" Text="" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            </Grid>
+            
         </StackPanel>
     </Grid>
 </Page>
