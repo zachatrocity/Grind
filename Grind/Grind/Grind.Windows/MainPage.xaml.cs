@@ -85,19 +85,10 @@ namespace Grind
                 return;
             }
 
-            //DispatcherTimer timer = new DispatcherTimer();
-            //timer.Interval = new System.TimeSpan(0, 0, 0, 10);
-            //timer.Tick += checkFadeIn;
-            //timer.Start();
             if (checkImage.Opacity == 0)
             {
                 fadeIn.Begin();
             }
-        }
-
-        private void checkFadeIn(object sender, object e)
-        {
-            checkImage.Opacity += .1; 
         }
 
 
@@ -124,8 +115,7 @@ namespace Grind
                 todoList.toDoList.Remove(item);
             }
 
-            if(checkImage.Opacity > 0)
-                fadeOut.Begin();
+            fadeOut.Begin();
         }
 
         private void box_DragItemsStarting(object sender, DragItemsStartingEventArgs e)
@@ -151,8 +141,7 @@ namespace Grind
                 todoList.doneList.Remove(item);
             }
 
-            if (undoImage.Opacity > 0)
-                undoFadeOut.Begin();
+            undoFadeOut.Begin();
         }
 
         private void box_DragLeave(object sender, DragEventArgs e)
@@ -163,10 +152,7 @@ namespace Grind
                 return;
             }
 
-            if (undoImage.Opacity > 0)
-            {
-                undoFadeOut.Begin();
-            }
+            undoFadeOut.Begin();
         }
 
         private void doneBox_DragLeave(object sender, DragEventArgs e)
@@ -176,10 +162,9 @@ namespace Grind
             {
                 return;
             }
-            if (checkImage.Opacity > 0)
-            {
-                fadeOut.Begin();
-            }
+            
+            fadeOut.Begin();
+            
         }
 
         private void toDoBox_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
