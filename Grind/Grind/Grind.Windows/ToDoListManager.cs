@@ -19,5 +19,9 @@ namespace Grind
 
             doneList.Add("Read bible");
         }
+
+        public void SaveLists() {
+            //save the lists
+        }
     }
 }

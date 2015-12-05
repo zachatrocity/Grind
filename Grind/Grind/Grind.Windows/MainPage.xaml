@@ -115,12 +115,12 @@
                     </Border.Background>
                 </Border>
 
-                <TextBlock Grid.Column="1" Grid.ColumnSpan="2" x:Name="githubUsernameText" FontSize="24" Margin="25,0,0,0" HorizontalAlignment="Left"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="3" Text="Followers" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.ColumnSpan="4" x:Name="githubUsernameText" FontSize="24" Margin="25,0,0,0" HorizontalAlignment="Left"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="3" Text="Followers" x:Name="githubFollowersLabel" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="2" x:Name="githubFollowersText" Text="" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="2" Grid.Row="3" Text="Following" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="2" Grid.Row="3" Text="Following" x:Name="githubFollowingLabel" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="2" Grid.Row="2" x:Name="githubFollowingText" Text="" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Column="3" Grid.Row="3" Text="Repos" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="3" Grid.Row="3" Text="Repos" x:Name="githubRepoLabel" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Column="3" Grid.Row="2" x:Name="githubReposText" Text="" FontSize="26" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </Grid>
             

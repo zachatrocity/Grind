@@ -36,19 +36,54 @@ namespace Grind
            
             doneBox.ItemsSource = todoList.doneList;
 
-            setWeatherWidget();
+            if(SettingsPage.Weather)
+                setWeatherWidget();
+            else
+            {
+                weatherWidget.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            }
+
+            if (SettingsPage.Github)
+            {
+                if (SettingsPage.githubUsername != "")
+                {
+                    githubAPI = new GitHubAPI(SettingsPage.githubUsername);
+                    setGithubWidget();
+                }
+                else
+                {
+                    githubUsernameText.Text = "Add username in Settings.";
+                }
+            }
+            else
+            {
+                githubWidget.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            }
             
-            githubAPI = new GitHubAPI("zachatrocity");
-            setGithubWidget();
         }
 
         private async void setGithubWidget()
         {
-            githubUsernameText.Text = githubAPI.username;
-            githubUserImage.ImageSource = await githubAPI.getUserImage();
-            githubFollowersText.Text = await githubAPI.getUserFollowers();
-            githubFollowingText.Text = await githubAPI.getUserFollowing();
-            githubReposText.Text = await githubAPI.getUserRepoCount();
+            githubWidget.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            try
+            {
+                githubUsernameText.Text = githubAPI.username;
+                githubUserImage.ImageSource = await githubAPI.getUserImage();
+                githubFollowersText.Text = await githubAPI.getUserFollowers();
+                githubFollowingText.Text = await githubAPI.getUserFollowing();
+                githubReposText.Text = await githubAPI.getUserRepoCount();
+                githubRepoLabel.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                githubFollowersLabel.Visibility = Windows.UI.Xaml.Visibility.Visible;
+                githubFollowingLabel.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            }
+            catch (Octokit.RateLimitExceededException)
+            {
+                githubUsernameText.Text = "Unable to load.";
+                githubRepoLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                githubFollowersLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                githubFollowingLabel.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+            }
+            
         }
 
         private async void setWeatherWidget()

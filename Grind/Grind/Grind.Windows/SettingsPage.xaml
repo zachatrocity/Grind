@@ -83,9 +83,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Username:" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" ></TextBlock>
-                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Name="GithubUsername" IsEnabled="False"></TextBox>
+                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" Name="GithubUsername" IsEnabled="False" TextChanged="GithubUsername_TextChanged"></TextBox>
                 <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Text="Location:"/>
-                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" PlaceholderText="City, State" Name="WeatherLocation" IsEnabled="False"/>
+                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch" PlaceholderText="City, State" TextChanged="WeatherLocation_TextChanged" Name="WeatherLocation" IsEnabled="False"/>
             </Grid>
         </StackPanel>
     </Grid>

@@ -26,6 +26,10 @@ namespace Grind
 
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
+        public static bool Github = false;
+        public static string githubUsername = "";
+        public static bool Weather = false;
+        public static string weatherLocation = "";
 
         /// <summary>
         /// This can be changed to a strongly typed view model.
@@ -66,6 +70,10 @@ namespace Grind
         /// session. The state will be null the first time a page is visited.</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            GithubSwitch.IsOn = Github;
+            GithubUsername.Text = githubUsername;
+            WeatherSwitch.IsOn = Weather;
+            WeatherLocation.Text = weatherLocation;
         }
 
         /// <summary>
@@ -78,6 +86,7 @@ namespace Grind
         /// serializable state.</param>
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+
         }
 
         #region NavigationHelper registration
@@ -108,6 +117,7 @@ namespace Grind
             if(GithubSwitch.IsOn)
             {
                 GithubUsername.IsEnabled = true;
+                Github = true;
             }
             else
             {
@@ -120,11 +130,22 @@ namespace Grind
             if(WeatherSwitch.IsOn)
             {
                 WeatherLocation.IsEnabled = true;
+                Weather = true;
             }
             else
             {
                 WeatherLocation.IsEnabled = false;
             }
+        }
+
+        private void GithubUsername_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            githubUsername = GithubUsername.Text;
+        }
+
+        private void WeatherLocation_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            weatherLocation = WeatherLocation.Text;
         }
     }
 }
