@@ -91,4 +91,10 @@
             </Grid>
         </StackPanel>
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Home" Label="Home" Click="AppBarButton_Click_Home"/>
+            <AppBarButton Icon="Help" Label="Help" Click="AppBarButton_Click_About" />
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

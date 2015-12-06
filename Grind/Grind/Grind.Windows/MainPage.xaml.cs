@@ -1,4 +1,5 @@
 ﻿using System;
+using Grind.Common;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Grind
@@ -24,6 +26,7 @@ namespace Grind
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private NavigationHelper navigationHelper;
         ToDoListManager todoList = new ToDoListManager();
         WeatherAPI weather = new WeatherAPI();
         DispatcherTimer weatherTimer = new DispatcherTimer();
@@ -36,7 +39,66 @@ namespace Grind
            
             doneBox.ItemsSource = todoList.doneList;
 
-            if(SettingsPage.Weather)
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += navigationHelper_LoadState;
+            this.navigationHelper.SaveState += navigationHelper_SaveState;
+            
+        }
+
+        /// <summary>
+        /// Populates the page with content passed during navigation. Any saved state is also
+        /// provided when recreating a page from a prior session.
+        /// </summary>
+        /// <param name="sender">
+        /// The source of the event; typically <see cref="NavigationHelper"/>
+        /// </param>
+        /// <param name="e">Event data that provides both the navigation parameter passed to
+        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
+        /// a dictionary of state preserved by this page during an earlier
+        /// session. The state will be null the first time a page is visited.</param>
+        private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+         Windows.Storage.ApplicationData.Current.RoamingSettings;
+            if (roamingSettings.Values.ContainsKey("todolist"))
+            {
+                todoList.ToDoFromXml(roamingSettings.Values["todolist"].ToString());
+                toDoBox.ItemsSource = todoList.toDoList;
+            }
+
+            if (roamingSettings.Values.ContainsKey("donelist"))
+            {
+                todoList.DoneFromXml(roamingSettings.Values["donelist"].ToString());
+                doneBox.ItemsSource = todoList.doneList;
+            }
+
+            if (roamingSettings.Values.ContainsKey("githubEnabled"))
+            {
+                SettingsPage.Github = Convert.ToBoolean(roamingSettings.Values["githubEnabled"].ToString());
+            }
+
+            if (roamingSettings.Values.ContainsKey("githubUsername"))
+            {
+                SettingsPage.githubUsername = roamingSettings.Values["githubUsername"].ToString();
+
+            }
+
+            if (roamingSettings.Values.ContainsKey("githubPassword"))
+            {
+                SettingsPage.githubPassword = roamingSettings.Values["githubPassword"].ToString();
+            }
+
+            if (roamingSettings.Values.ContainsKey("weatherEnabled"))
+            {
+                SettingsPage.Weather = Convert.ToBoolean(roamingSettings.Values["weatherEnabled"].ToString());
+            }
+
+            if (roamingSettings.Values.ContainsKey("weatherLocation"))
+            {
+                SettingsPage.weatherLocation = roamingSettings.Values["weatherLocation"].ToString();
+            }
+
+            if (SettingsPage.Weather)
                 setWeatherWidget();
             else
             {
@@ -59,7 +121,34 @@ namespace Grind
             {
                 githubWidget.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             }
-            
+
+        }
+
+        /// <summary>
+        /// Preserves state associated with this page in case the application is suspended or the
+        /// page is discarded from the navigation cache.  Values must conform to the serialization
+        /// requirements of <see cref="SuspensionManager.SessionState"/>.
+        /// </summary>
+        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
+        /// <param name="e">Event data that provides an empty dictionary to be populated with
+        /// serializable state.</param>
+        private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+            // Save app data
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+                Windows.Storage.ApplicationData.Current.RoamingSettings;
+            roamingSettings.Values["todolist"] = todoList.ToDoToXml();
+            roamingSettings.Values["donelist"] = todoList.DoneToXml();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            navigationHelper.OnNavigatedFrom(e);
         }
 
         private async void setGithubWidget()

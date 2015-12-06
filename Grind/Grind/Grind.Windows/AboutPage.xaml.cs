@@ -102,5 +102,15 @@ namespace Grind
         }
 
         #endregion
+
+        private void AppBarButton_Click_Home(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
+        }
+
+        private void AppBarButton_Click_Settings(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(SettingsPage));
+        }
     }
 }

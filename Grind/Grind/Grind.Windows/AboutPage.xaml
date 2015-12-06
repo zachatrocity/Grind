@@ -47,4 +47,10 @@
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Home" Label="Home" Click="AppBarButton_Click_Home"/>
+            <AppBarButton Icon="Setting" Label="Settings" Click="AppBarButton_Click_Settings" />
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

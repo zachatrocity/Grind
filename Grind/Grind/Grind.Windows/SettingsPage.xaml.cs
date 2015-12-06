@@ -71,10 +71,33 @@ namespace Grind
         /// session. The state will be null the first time a page is visited.</param>
         private void navigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            GithubSwitch.IsOn = Github;
-            GithubUsername.Text = githubUsername;
-            WeatherSwitch.IsOn = Weather;
-            WeatherLocation.Text = weatherLocation;
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+        Windows.Storage.ApplicationData.Current.RoamingSettings;
+            if (roamingSettings.Values.ContainsKey("githubEnabled"))
+            {
+                GithubSwitch.IsOn = Convert.ToBoolean(roamingSettings.Values["githubEnabled"].ToString());
+            }
+
+            if (roamingSettings.Values.ContainsKey("githubUsername"))
+            {
+                githubUsername = GithubUsername.Text = roamingSettings.Values["githubUsername"].ToString();
+
+            }
+
+            if (roamingSettings.Values.ContainsKey("githubPassword"))
+            {
+                githubPassword = GithubPassword.Password = roamingSettings.Values["githubPassword"].ToString();
+            }
+
+            if (roamingSettings.Values.ContainsKey("weatherEnabled"))
+            {
+                WeatherSwitch.IsOn = Convert.ToBoolean(roamingSettings.Values["weatherEnabled"].ToString());
+            }
+
+            if (roamingSettings.Values.ContainsKey("weatherLocation"))
+            {
+                WeatherLocation.Text = roamingSettings.Values["weatherLocation"].ToString();
+            }
         }
 
         /// <summary>
@@ -87,7 +110,15 @@ namespace Grind
         /// serializable state.</param>
         private void navigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+            // Save app data
+            Windows.Storage.ApplicationDataContainer roamingSettings =
+                Windows.Storage.ApplicationData.Current.RoamingSettings;
+            roamingSettings.Values["githubEnabled"] = GithubSwitch.IsOn;
+            roamingSettings.Values["githubUsername"] = GithubUsername.Text;
+            roamingSettings.Values["githubPassword"] = GithubPassword.Password;
 
+            roamingSettings.Values["weatherEnabled"] = WeatherSwitch.IsOn;
+            roamingSettings.Values["weatherLocation"] = WeatherLocation.Text;
         }
 
         #region NavigationHelper registration
@@ -154,6 +185,16 @@ namespace Grind
         private void GithubPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
             githubPassword = GithubPassword.Password;
+        }
+
+        private void AppBarButton_Click_Home(object sender, RoutedEventArgs e)
+        {
+            navigationHelper.GoBack();
+        }
+
+        private void AppBarButton_Click_About(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AboutPage));
         }
     }
 }
