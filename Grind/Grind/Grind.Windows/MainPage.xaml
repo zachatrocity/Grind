@@ -13,9 +13,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-       
 
-        <TextBlock x:Name="weatherWidget" Grid.Column="0" HorizontalAlignment="Left" Margin="35,35,0,0" TextWrapping="Wrap" Text="Weather" VerticalAlignment="Top" Height="auto" Width="auto" FontSize="32"/>
+
+        <TextBlock x:Name="weatherWidget" ToolTipService.ToolTip="Edit weather in Settings" Grid.Column="0" HorizontalAlignment="Left" Margin="35,35,0,0" TextWrapping="Wrap" Text="Weather" VerticalAlignment="Top" Height="auto" Width="auto" FontSize="32"/>
 
         <ListView x:Name="toDoBox" Grid.Column="0" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="350" 
                   AllowDrop="True" CanDragItems="True" CanReorderItems="True" DragItemsStarting="box_DragItemsStarting" Drop="toDoBox_Drop" SelectionMode="Multiple"  DragOver="todobox_OnDragOver" DragLeave="box_DragLeave" DoubleTapped="toDoBox_DoubleTapped">
@@ -41,8 +41,12 @@
             <TextBox x:Name="addToDoTextBox" Grid.Column="0" HorizontalAlignment="Center" Height="30" Margin="0,585,50,0" VerticalAlignment="Top"
                      KeyUp="addToDoTextBox_KeyUp"
                  Foreground="White" Width="300" Background="Transparent" BorderBrush="LightSlateGray" BorderThickness="2"></TextBox>
-        <Button x:Name="addButton" Grid.Column="0" HorizontalAlignment="Center" Margin="300,577,0,0" VerticalAlignment="Top" Click="addButton_Click"  BorderThickness="0">
+        <Button x:Name="addButton" Grid.Column="0" HorizontalAlignment="Center" ToolTipService.ToolTip="Add to list" Margin="300,577,0,0" VerticalAlignment="Top" Click="addButton_Click"  BorderThickness="0">
             <Image Source="ms-appx:///Assets/add.png" Height="32" Width="32"></Image>
+        </Button>
+
+        <Button x:Name="trashButton" Grid.Column="1" ToolTipService.ToolTip="Delete Selected" HorizontalAlignment="Center" Margin="0,577,0,0" VerticalAlignment="Top" Click="trashButton_Click"  BorderThickness="0">
+            <Image Source="ms-appx:///Assets/trash.png" Height="32" Width="32"></Image>
         </Button>
 
         <ListView x:Name="doneBox" Grid.Column="1" HorizontalAlignment="Center" Height="400" Margin="0,150,0,0" VerticalAlignment="Top" Width="350" 
@@ -65,10 +69,10 @@
         </ListView>
         <TextBlock x:Name="toDoTextBlock" Grid.Column="0" HorizontalAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="To Do:" VerticalAlignment="Top" Height="35" Width="70" FontSize="24"/>
         <TextBlock x:Name="doneTextBlock" Grid.Column="1" HorizontalAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" Text="Done:" VerticalAlignment="Top" Height="35" Width="70" FontSize="24"/>
-        <Button x:Name="settingsButton" Grid.Column="1" HorizontalAlignment="Right" Margin="0,30,30,0" VerticalAlignment="Top" Click="settingsButton_Click" BorderThickness="0">
+        <Button x:Name="settingsButton" Grid.Column="1" ToolTipService.ToolTip="Settings" HorizontalAlignment="Right" Margin="0,30,30,0" VerticalAlignment="Top" Click="settingsButton_Click" BorderThickness="0">
             <Image Source="ms-appx:///Assets/settings.png" Height="64" Width="64"></Image>
-        </Button>  
-        <Button x:Name="aboutButton" Grid.Column="1" HorizontalAlignment="Right" Margin="0,124,30,0" VerticalAlignment="Top" Click="aboutButton_Click" BorderThickness="0">
+        </Button>
+        <Button x:Name="aboutButton" ToolTipService.ToolTip="About" Grid.Column="1" HorizontalAlignment="Right" Margin="0,124,30,0" VerticalAlignment="Top" Click="aboutButton_Click" BorderThickness="0">
             <Image Source="ms-appx:///Assets/about.png" Height="64" Width="64"></Image>
         </Button>
 
@@ -96,8 +100,8 @@
                 </Image.Resources>
             </Image>
         </StackPanel>
-        
-        <StackPanel Grid.Column="0" Grid.Row="0" Width="400" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="25,0,0,25" x:Name="githubWidget">
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Width="400" Height="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="25,0,0,25" x:Name="githubWidget" ToolTipService.ToolTip="Edit GitHub in Settings">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="25"/>

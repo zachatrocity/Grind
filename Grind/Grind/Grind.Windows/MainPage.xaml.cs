@@ -335,5 +335,15 @@ namespace Grind
                 addToDoTextBox.Text = "";
             }
         }
+
+        private void trashButton_Click(object sender, RoutedEventArgs e)
+        {
+            var items = doneBox.SelectedItems;
+            int count = items.Count;
+            for(int i = 0; i < count; i++)
+            {
+                todoList.doneList.Remove(items[0].ToString());
+            }
+        }
     }
 }

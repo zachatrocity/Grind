@@ -2,7 +2,7 @@
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
   <Identity Name="6df0157d-7b87-4091-aed2-b97f7a99e037" Publisher="CN=zrussell1" Version="1.0.0.0" />
   <Properties>
-    <DisplayName>Grind.Windows</DisplayName>
+    <DisplayName>Grind</DisplayName>
     <PublisherDisplayName>zrussell1</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

@@ -143,6 +143,9 @@
     <Content Include="Assets\check.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\StoreLogo.scale-140.png" />
+    <Content Include="Assets\StoreLogo.scale-180.png" />
+    <Content Include="Assets\trash.png" />
     <Content Include="Assets\twitter.png" />
     <Content Include="Assets\undo.png" />
     <Content Include="Assets\weather.png" />

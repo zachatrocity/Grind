@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using ForecastIOPortable;
 using Windows.Devices.Geolocation;
+using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace Grind
 {
@@ -13,82 +17,82 @@ namespace Grind
         //https://api.darkskyapp.com/v1/forecast/d41d8cd98f00b204e9800998ecf8427e/42.7243,-73.6927
         private static string APIKEY = "bb70271303471570aff4370dabe92cdf";
         private Geolocator Locator = new Geolocator();
-        private double LAT = 35.2469;
-        private double LONG = -91.7336;
+        private double LAT;
+        private double LONG;
         private ForecastApi API = new ForecastApi(APIKEY);
-        public ForecastIOPortable.Models.HourlyForecast HourlyForecast;
+        public ForecastIOPortable.Models.CurrentDataPoint HourlyForecast;
         //0 is bad, 1 is good.
-        public int statusCode = 0;
         public WeatherAPI()
         {
-            updateWeatherForecast();
-        }
-
-        public async void updateWeatherForecast(){
             var API = new ForecastApi(APIKEY);
-            var currentForecast = await API.GetWeatherDataAsync(LAT, LONG, Unit.US);
-            HourlyForecast = currentForecast.Hourly;
         }
 
         public async Task<string> getCurrentTemp()
         {
-            try
+            if (SettingsPage.Weather && SettingsPage.weatherLocation == "")
             {
-                Locator.DesiredAccuracy = PositionAccuracy.High;
-                Geoposition pos = await Locator.GetGeopositionAsync();
-                LAT = pos.Coordinate.Latitude;
-                LONG = pos.Coordinate.Longitude;
-                statusCode = 1;
-            }
-            catch
-            {
-                //set to searcy AR
-                LAT = 35.2469;
-                LONG = -91.7336;
-            }
-
-            if (HourlyForecast == null)
-            {
-                var currentForecast = await API.GetWeatherDataAsync(LAT, LONG, Unit.US);
-                HourlyForecast = currentForecast.Hourly;
-                return Math.Truncate(HourlyForecast.Hours[0].Temperature).ToString();
+                return "0";
             }
             else
             {
-                return Math.Truncate(HourlyForecast.Hours[0].Temperature).ToString();
+                await setLocation();
+                var weatherURL = "https://api.forecast.io/forecast/bb70271303471570aff4370dabe92cdf/" + LAT + "," + LONG;
+
+                var httpClient = new HttpClient();
+                var content = await httpClient.GetStringAsync(weatherURL);
+
+                JObject weatherJson = JObject.Parse(content);
+
+                return (string)weatherJson["currently"]["temperature"];
             }
+
         }
 
         public async Task<string> getCurrentSummary()
         {
-            try
+            if (SettingsPage.Weather && SettingsPage.weatherLocation == "")
             {
-                Locator.DesiredAccuracy = PositionAccuracy.High;
-                Geoposition pos = await Locator.GetGeopositionAsync();
-                LAT = pos.Coordinate.Latitude;
-                LONG = pos.Coordinate.Longitude;
-                statusCode = 1;
-            }
-            catch
-            {
-                //set to searcy AR
-                LAT = 35.2469;
-                LONG = -91.7336;
-            }
-
-            if (HourlyForecast == null)
-            {
-                var currentForecast = await API.GetWeatherDataAsync(LAT, LONG, Unit.US);
-                HourlyForecast = currentForecast.Hourly;
-                return HourlyForecast.Hours[0].Summary.ToString();
+                return "Enter a location.";
             }
             else
             {
-                return HourlyForecast.Hours[0].Summary.ToString();
+                await setLocation();
+
+                var weatherURL = "https://api.forecast.io/forecast/bb70271303471570aff4370dabe92cdf/" + LAT + "," + LONG;
+
+                var httpClient = new HttpClient();
+                var content = await httpClient.GetStringAsync(weatherURL);
+
+                JObject weatherJson = JObject.Parse(content);
+
+                return (string)weatherJson["currently"]["summary"];
             }
         }
 
-        public async void setLocation()
+        public async Task setLocationByString(){
+            var geocodeURL = "http://www.mapquestapi.com/geocoding/v1/address?key=AAs1zLHhuSXaxh6INFO6GSOMUK7szrwY&location=" + SettingsPage.weatherLocation;
+
+            var httpClient = new HttpClient();
+            var content = await httpClient.GetStringAsync(geocodeURL);
+
+            Regex r = new Regex("\"lat\":(?<lat>\\d*.\\d*)", RegexOptions.IgnoreCase);
+            Match m = r.Match(content);
+
+            if(m.Success)
+            {
+                LAT = Convert.ToDouble(m.Groups["lat"].ToString());
+            }
+
+            r = new Regex("\"lng\":(?<lng>-\\d*.\\d*)", RegexOptions.IgnoreCase);
+            m = r.Match(content);
+
+            if (m.Success)
+            {
+                LONG = Convert.ToDouble(m.Groups["lng"].ToString());
+            }
+        }
+
+        public async Task setLocation()
         {
             try
             {
@@ -96,13 +100,15 @@ namespace Grind
                 Geoposition pos = await Locator.GetGeopositionAsync();
                 LAT = pos.Coordinate.Latitude;
                 LONG = pos.Coordinate.Longitude;
-                statusCode = 1;
             }
             catch
             {
-                //set to searcy AR
-                LAT = 35.2469;
-                LONG = -91.7336;
+                setLocationByString();
+            }
+
+            if (LAT == 0.0 || LONG == 0.0)
+            {
+                await setLocationByString();
             }
         }
     }

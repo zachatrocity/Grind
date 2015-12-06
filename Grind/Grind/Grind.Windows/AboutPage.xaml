@@ -46,6 +46,28 @@
             <TextBlock x:Name="pageTitle" Text="About" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1" 
                         IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
         </Grid>
+        <StackPanel Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Grind" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                <TextBlock Grid.Row="1" Text="An Application by Zach Russell and Brock McFarland" FontSize="24" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="2"></TextBlock>
+                <TextBlock Grid.Row="3"  FontSize="24" Text="Grind is a minimalistic to-do list management application that allows users to manage their daily grind, as well as keep up to date with the current weather and their github profile. Our target audience is your average computer science student that may find it hard to keep track of tasks." Width="700" Grid.ColumnSpan="2" TextWrapping="WrapWholeWords"></TextBlock>
+                <TextBlock Grid.Row="5" TextAlignment="Center" FontSize="14" Text="Icon made by FreePik from www.flaticon.com" Width="700" Grid.ColumnSpan="2"></TextBlock>
+                <Image Grid.Row="6" VerticalAlignment="Bottom" Source="ms-appx:///Assets/SplashScreen.scale-100.png" Height="250" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="0,20,0,0"></Image>
+            </Grid>
+        </StackPanel>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar>
